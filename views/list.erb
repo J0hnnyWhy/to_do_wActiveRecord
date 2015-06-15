@@ -1,0 +1,54 @@
+<h2>Here are All of the Tasks for <%= @list.name() %></h2>
+
+
+
+<div class='form-group'>
+  <ul>
+    <% @tasks.each.not_done() do |task| %>
+
+
+    <li><%= task.description() %><a href="/tasks/<%= task.id() %>/edit">Update this task's description</a></li>
+    <% end %>
+  </ul>
+</div>
+
+
+<form action='/lists/:id' method='post'>
+
+  <input id='list_id' name='list_id' type='hidden' value='<%= @list.id %>'>
+
+  <label for='description'>Add a Task to this List</label>
+
+  <input id = 'description' name='description' type='text'>
+  <button type='submit' class='btn btn-info'>Add</button>
+
+
+</form>
+
+
+
+
+<div class="form-group">
+  <h3> Update the <%=@list.name %> list </h3>
+
+  <form action='/lists/ <%= @list.id %>' method='post'>
+    <input name='_method' type='hidden' value='patch'>
+
+    <label for='name'> Rename Your List:</label>
+    <input id='name' name='name' type='text'>
+
+    <button type='submit' class='btn btn-info'> Update </button>
+
+  </form>
+</div>
+
+<div class="container">
+  <form action='/' method='post'>
+    <input name='_method' type='hidden' value='delete'>
+    <input id='id' name='id' type='hidden' value='<%= @list.id %>'>
+
+    <button type="submit" class='btn btn-danger'>Delete List</button>
+  </form>
+</div>
+
+<p><h3><a href='/'>Return to Main Page</h3></a></p>

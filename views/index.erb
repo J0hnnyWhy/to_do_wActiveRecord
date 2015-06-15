@@ -1,0 +1,20 @@
+<h1>To Do List App</h1>
+
+<p>List of Existing Lists:</p>
+
+
+<ul>
+  <% @lists.each() do |list| %>
+  <li><a href='/lists/<%= list.id() %>'><%= list.name() %></a></li>
+  <% end %>
+</ul>
+<br><br><br><br>
+<p>Add List:</p>
+
+<form action='/' method='post'>
+  <div class='form-group'>
+    <label for='name'>Name</label>
+    <input id='name' name='name' type='text' placeholder='name'>
+  </div>
+  <button type='submit' class='btn btn-button'>Add</button>
+</form>
