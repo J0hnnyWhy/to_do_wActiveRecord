@@ -4,10 +4,10 @@
 
 <div class='form-group'>
   <ul>
-    <% @tasks.each.not_done() do |task| %>
+    <% @list.tasks.not_done.each() do |task| %>
 
 
-    <li><%= task.description() %><a href="/tasks/<%= task.id() %>/edit">Update this task's description</a></li>
+    <li><%= task.description() %><a href="/tasks/<%= task.id() %>"> - view task</a></li>
     <% end %>
   </ul>
 </div>

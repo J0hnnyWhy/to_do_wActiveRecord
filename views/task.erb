@@ -7,3 +7,14 @@
 
   <button type="submit">Update</button>
 </form>
+<br>
+<div class="container">
+  <form action="/tasks/<%= @task.id() %>" method='post'>
+    <input name='_method' type='hidden' value='delete'>
+    <input id='id' name='id' type='hidden' value='<%= @task.id %>'>
+
+    <button type="submit" class='btn btn-danger'>Delete Task</button>
+  </form>
+</div>
+<br>
+<p><a href="/">Return to home</a></p>

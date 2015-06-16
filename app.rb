@@ -22,7 +22,6 @@ post('/') do
 end
 
 get('/lists/:id') do
-  @tasks = Task.all
   @list = List.find(params.fetch('id').to_i())
   @lists = List.all
   erb(:list)
@@ -37,12 +36,7 @@ post('/lists/:id') do
   redirect back
 end
 
-get('/lists/:id/edit') do
 
-  @list = List.find(params.fetch("id").to_i)
-  @lists = List.all
-  erb(:list)
-end
 
 patch('/lists/:id') do
 
@@ -61,15 +55,25 @@ delete('/') do
   erb(:index)
 end
 
-get('/tasks/:id/edit') do
+get('/tasks/:id') do
   @task = Task.find(params.fetch("id").to_i())
-  erb(:task_edit)
+  erb(:task)
 end
 
 patch("/tasks/:id") do
   description = params.fetch("description")
   @task = Task.find(params.fetch("id").to_i())
+  x = @task.list_id
+  @list = List.find(x)
   @task.update({:description => description})
   @tasks = Task.all()
-  erb(:index)
+  erb(:list)
+end
+
+delete('/tasks/:id') do
+  @task = Task.find(params.fetch('id').to_i)
+  x = @task.list_id
+  @list = List.find(x)
+  @task.delete
+  erb(:list)
 end
