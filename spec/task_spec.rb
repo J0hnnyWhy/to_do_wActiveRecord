@@ -1,6 +1,12 @@
 require("spec_helper")
 
 describe(Task) do
+  it("converts the name to lowercase") do
+    task = Task.create({:description => "ICE CREAM ROCKS"})
+    expect(task.description()).to(eq("ice cream rocks"))
+  end
+
+
   it("validates presence of description") do
     task = Task.new({:description => ""})
     expect(task.save()).to(eq(false))
