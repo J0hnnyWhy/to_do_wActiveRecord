@@ -30,10 +30,13 @@ end
 post('/lists/:id') do
   list_id = params.fetch('list_id').to_i()
   description = params.fetch('description')
-  task = Task.new({:description => description, :list_id => list_id, :done => false})
-  task.save()
+  @task = Task.new({:description => description, :list_id => list_id, :done => false})
   @list = List.find(list_id)
-  redirect back
+  if @task.save()
+    erb(:list)
+  else
+    erb(:errors)
+  end
 end
 
 

@@ -1,6 +1,16 @@
 require("spec_helper")
 
 describe(Task) do
+  it("validates presence of description") do
+    task = Task.new({:description => ""})
+    expect(task.save()).to(eq(false))
+  end
+
+it("ensures the length of description is at most 50 characrters") do
+  task = Task.new({:description => "a".*(51)})
+  expect(task.save()).to(eq(false))
+end
+
 
   describe(".not_done") do
     it("returns the not done tasks") do
